@@ -1,0 +1,472 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
+All colors MUST be HSL.
+*/
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222 84% 4.9%; /* #111827 - gray-900 */
+
+    --card: 0 0% 100%;
+    --card-foreground: 222 84% 4.9%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 84% 4.9%;
+
+    --primary: 217 91% 60%; /* #3b82f6 - blue-500 */
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 217 91% 97%; /* #eff6ff - blue-50 */
+    --secondary-foreground: 217 91% 60%;
+
+    --muted: 217 91% 97%;
+    --muted-foreground: 215 16% 47%; /* #6b7280 - gray-500 */
+
+    --accent: 217 91% 97%;
+    --accent-foreground: 217 91% 60%;
+
+    --destructive: 0 84% 60%; /* #ef4444 - red-500 */
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 215 16% 84%; /* #d1d5db - gray-300 */
+    --input: 215 16% 84%;
+    --ring: 217 91% 60%;
+
+    --radius: 0.75rem; /* Increased for more modern look */
+
+    --sidebar-background: 222 84% 4.9%; /* #111827 - gray-900 */
+
+    --sidebar-foreground: 0 0% 100%;
+
+    --sidebar-primary: 217 91% 60%;
+
+    --sidebar-primary-foreground: 0 0% 100%;
+
+    --sidebar-accent: 222 84% 4.9%;
+
+    --sidebar-accent-foreground: 0 0% 100%;
+
+    --sidebar-border: 222 84% 4.9%;
+
+    --sidebar-ring: 217 91% 60%;
+
+    /* Status Colors */
+    --success: 142 76% 36%; /* #16a34a - green-600 */
+    --success-foreground: 0 0% 100%;
+    
+    --warning: 38 92% 50%; /* #eab308 - yellow-500 */
+    --warning-foreground: 0 0% 100%;
+    
+    --error: 0 84% 60%; /* #ef4444 - red-500 */
+    --error-foreground: 0 0% 100%;
+  }
+
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 217 91% 60%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 212.7 26.8% 83.9%;
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+    
+    /* Status Colors - Dark Mode */
+    --success: 142 76% 36%;
+    --success-foreground: 0 0% 100%;
+    
+    --warning: 38 92% 50%;
+    --warning-foreground: 0 0% 100%;
+    
+    --error: 0 84% 60%;
+    --error-foreground: 0 0% 100%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+  }
+  
+  html {
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+  }
+}
+
+/* Performance optimizations */
+* {
+  box-sizing: border-box;
+}
+
+/* Reduce layout thrashing */
+html {
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+}
+
+body {
+  overflow-x: hidden;
+  /* Optimize for animations */
+  will-change: scroll-position;
+}
+
+/* Hardware acceleration for animations */
+.animate-accelerated {
+  transform: translateZ(0);
+  will-change: transform;
+}
+
+/* Optimize images */
+img {
+  max-width: 100%;
+  height: auto;
+  /* Prevent layout shift */
+  aspect-ratio: attr(width) / attr(height);
+}
+
+/* Smooth transitions */
+* {
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+
+/* Optimize scroll performance */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+/* Optimize horizontal scroll */
+.horizontal-scroll-container {
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Scroll hint gradients */
+.scroll-hint-gradient {
+  background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.9));
+}
+
+.scroll-hint-gradient-left {
+  background: linear-gradient(to left, transparent, rgba(255, 255, 255, 0.9));
+}
+
+/* Optimize animations */
+@keyframes gentle-pulse {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1.02);
+  }
+}
+
+.animate-pulse {
+  animation: gentle-pulse 2s ease-in-out;
+}
+
+/* Minimal section transitions for performance */
+section {
+  transition: background-color 0.2s ease-out;
+  /* Hardware acceleration */
+  transform: translateZ(0);
+  will-change: opacity, transform;
+}
+
+/* Section hover effects - only apply when not animating */
+section:not([data-animating="true"]):hover {
+  transform: translateY(-1px) translateZ(0);
+}
+
+/* Performance optimizations for animations */
+.motion-section {
+  will-change: opacity, transform;
+  transform: translateZ(0); /* Force hardware acceleration */
+}
+
+/* Ensure no horizontal scroll */
+body {
+  overflow-x: hidden;
+}
+
+/* Smooth scroll behavior */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Clean section spacing */
+section + section {
+  margin-top: 0;
+}
+
+/* Ensure smooth background transitions */
+section {
+  position: relative;
+}
+
+/* Remove any default margins that might cause gaps */
+section:first-child {
+  margin-top: 0;
+}
+
+section:last-child {
+  margin-bottom: 0;
+}
+
+/* Minimal fade-in animation */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px) translateZ(0);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) translateZ(0);
+  }
+}
+
+.fade-in-up {
+  animation: fadeInUp 0.8s ease-out;
+  will-change: opacity, transform;
+}
+
+/* Visual grounding for device animations */
+.device-grounding {
+  background: linear-gradient(180deg, rgba(229, 231, 235, 0.8) 0%, rgba(243, 244, 246, 0.6) 50%, rgba(249, 250, 251, 0.4) 100%);
+  box-shadow: 
+    0 20px 40px -15px rgba(0, 0, 0, 0.1),
+    0 10px 20px -5px rgba(0, 0, 0, 0.05),
+    0 4px 8px -2px rgba(0, 0, 0, 0.03);
+}
+
+/* Optimize form elements */
+input, textarea, select {
+  /* Prevent zoom on iOS */
+  font-size: 16px;
+  /* Smooth focus transitions */
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Optimize button interactions */
+button {
+  /* Prevent double-tap zoom on mobile */
+  touch-action: manipulation;
+  /* Smooth state transitions */
+  transition: all 0.2s ease;
+}
+
+/* Optimize modal animations */
+.modal-enter {
+  animation: modalEnter 0.3s ease-out;
+}
+
+.modal-exit {
+  animation: modalExit 0.2s ease-in;
+}
+
+@keyframes modalEnter {
+  from {
+    opacity: 0;
+    transform: scale(0.95) translateZ(0);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateZ(0);
+  }
+}
+
+@keyframes modalExit {
+  from {
+    opacity: 1;
+    transform: scale(1) translateZ(0);
+  }
+  to {
+    opacity: 0;
+    transform: scale(0.95) translateZ(0);
+  }
+}
+
+/* Optimize for high DPI displays */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  .high-dpi-optimized {
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+  }
+}
+
+/* Performance-focused utility classes */
+.gpu-accelerated {
+  transform: translateZ(0);
+  will-change: transform;
+}
+
+.no-layout-shift {
+  contain: layout;
+}
+
+.optimize-rendering {
+  contain: paint;
+}
+
+/* Mobile-specific spacing utilities */
+@media (max-width: 768px) {
+  .mobile-spacing-top {
+    padding-top: 1.5rem;
+  }
+  
+  .mobile-spacing-bottom {
+    padding-bottom: 1.5rem;
+  }
+  
+  .mobile-section-gap {
+    margin-top: 2rem;
+  }
+  
+  .mobile-optimized {
+    /* Reduce animation complexity on mobile */
+    transition-duration: 0.2s;
+  }
+  
+  /* Optimize touch interactions */
+  button, a {
+    min-height: 44px;
+    min-width: 44px;
+  }
+  
+  /* Stepper-specific mobile styles */
+  .stepper-container {
+    -webkit-overflow-scrolling: touch;
+    scroll-behavior: smooth;
+  }
+  
+  .stepper-button {
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+  }
+  
+
+  
+  /* Horizontal scroll styles */
+  .horizontal-scroll-container {
+    -webkit-overflow-scrolling: touch;
+    scroll-behavior: smooth;
+    touch-action: pan-x;
+  }
+  
+  .horizontal-scroll-container::-webkit-scrollbar {
+    display: none;
+  }
+  
+  .scroll-hint {
+    pointer-events: none;
+    user-select: none;
+  }
+  
+  .scroll-hint-gradient {
+    background: linear-gradient(90deg, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0.4) 50%, transparent 100%);
+  }
+  
+  .scroll-hint-gradient-left {
+    background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.4) 50%, rgba(255,255,255,0.8) 100%);
+  }
+  
+  /* Swipe gesture styles */
+  .swipe-container {
+    touch-action: pan-y;
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-touch-callout: none;
+  }
+  
+  .swipe-container:active {
+    cursor: grabbing;
+  }
+  
+  .swipe-feedback {
+    transition: transform 0.1s ease-out;
+  }
+  
+  .swipe-feedback:active {
+    transform: scale(0.98);
+  }
+}
+
+/* Reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+@media (min-width: 769px) {
+  .mobile-spacing-top,
+  .mobile-spacing-bottom,
+  .mobile-section-gap {
+    padding-top: 0;
+    padding-bottom: 0;
+    margin-top: 0;
+  }
+}
+
+@keyframes pulse-slow {
+  0%, 100% { box-shadow: 0 0 0 0 #3B82F6, 0 0 0 0 rgba(59,130,246,0.7); }
+  50% { box-shadow: 0 0 16px 4px #3B82F6, 0 0 32px 8px rgba(59,130,246,0.3); }
+}
+.animate-pulse-slow {
+  animation: pulse-slow 2.5s infinite;
+}
+.hover\:shadow-duesly-glow:hover {
+  box-shadow: 0 0 16px 4px #3B82F6, 0 0 32px 8px rgba(59,130,246,0.3);
+}
